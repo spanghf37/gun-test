@@ -1,5 +1,7 @@
 FROM debian:latest
 
+RUN apt-get update && apt-get upgrade && sudo apt-get install -y build-essential && curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && sudo apt-get install -y nodejs git wget
+
 RUN set -ex && \
     for key in \
         05CE15085FC09D18E99EFB22684A14CF2582E0C5 ; \
@@ -23,8 +25,6 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" && \
     gpg --batch --verify influxdb_${INFLUXDB_VERSION}_${ARCH}.deb.asc influxdb_${INFLUXDB_VERSION}_${ARCH}.deb && \
     dpkg -i influxdb_${INFLUXDB_VERSION}_${ARCH}.deb && \
     rm -f influxdb_${INFLUXDB_VERSION}_${ARCH}.deb*
-
-RUN apt-get update && apt-get upgrade && sudo apt-get install -y build-essential && curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && sudo apt-get install -y nodejs git wget
 
 COPY influxdb.conf /etc/influxdb/influxdb.conf
 
