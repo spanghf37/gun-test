@@ -1,4 +1,3 @@
-//FROM buildpack-deps:stretch-curl
 FROM debian:latest
 
 RUN set -ex && \
