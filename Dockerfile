@@ -25,7 +25,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" && \
     dpkg -i influxdb_${INFLUXDB_VERSION}_${ARCH}.deb && \
     rm -f influxdb_${INFLUXDB_VERSION}_${ARCH}.deb*
 
-RUN apt-get update && apt-get upgrade && curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && sudo apt-get install -y nodejs
+RUN apt-get update && apt-get upgrade && sudo apt-get install -y build-essential && curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && sudo apt-get install -y nodejs
 
 COPY influxdb.conf /etc/influxdb/influxdb.conf
 
