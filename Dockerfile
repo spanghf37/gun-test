@@ -24,7 +24,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" && \
     dpkg -i influxdb_${INFLUXDB_VERSION}_${ARCH}.deb && \
     rm -f influxdb_${INFLUXDB_VERSION}_${ARCH}.deb*
 
-RUN apt-get update && apt-get upgrade && sudo apt-get install -y build-essential && curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && sudo apt-get install -y nodejs
+RUN apt-get update && apt-get upgrade && sudo apt-get install -y build-essential && curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && sudo apt-get install -y nodejs git wget
 
 COPY influxdb.conf /etc/influxdb/influxdb.conf
 
@@ -34,5 +34,15 @@ VOLUME /var/lib/influxdb
 
 COPY entrypoint.sh /entrypoint.sh
 COPY init-influxdb.sh /init-influxdb.sh
+
+RUN mkdir /home/gun-test
+
+COPY index.js /home/gun-test/index.js
+COPY influxtest /home/gun-test/influxtest.js
+
+WORKDIR /home/gun-test
+
+RUN git clone https://github.com/spanghf37/gun-influxdb.git
+
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["influxd"]
