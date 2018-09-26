@@ -1,28 +1,4 @@
-FROM alpine:latest
-# Build-time metadata as defined at http://label-schema.org
-ARG BUILD_DATE
-ARG VCS_REF
-ARG VCS_URL
-ARG VERSION
-LABEL org.label-schema.build-date=$BUILD_DATE \
-  org.label-schema.name="Gun - Offline First, Javascript Graph Database" \
-  org.label-schema.url="http://gun.js.org" \
-  org.label-schema.vcs-ref=$VCS_REF \
-  org.label-schema.vcs-url=$VCS_URL \
-  org.label-schema.vendor="The Gun Database Team" \
-  org.label-schema.version=$VERSION \
-  org.label-schema.schema-version="1.0"
-#  org.label-schema.description="Let it be pulled from Readme.md..." \
-WORKDIR /app
-ADD . .
-ENV NPM_CONFIG_LOGLEVEL warn
-RUN apk update && apk upgrade \
-  && apk add  --no-cache ca-certificates nodejs-npm \
-  && apk add --no-cache --virtual .build-dependencies python make g++ \
-  && npm install \
-  && apk del .build-dependencies && rm -rf /var/cache/* /tmp/npm*
-EXPOSE 8080
-EXPOSE 8765
+FROM buildpack-deps:stretch-curl
 
 RUN set -ex && \
     for key in \
@@ -47,6 +23,9 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" && \
     gpg --batch --verify influxdb_${INFLUXDB_VERSION}_${ARCH}.deb.asc influxdb_${INFLUXDB_VERSION}_${ARCH}.deb && \
     dpkg -i influxdb_${INFLUXDB_VERSION}_${ARCH}.deb && \
     rm -f influxdb_${INFLUXDB_VERSION}_${ARCH}.deb*
+
+RUN apt-get update && apt-get upgrade && apt-get install && curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && sudo apt-get install -y nodejs
+
 COPY influxdb.conf /etc/influxdb/influxdb.conf
 
 EXPOSE 8086
@@ -55,9 +34,5 @@ VOLUME /var/lib/influxdb
 
 COPY entrypoint.sh /entrypoint.sh
 COPY init-influxdb.sh /init-influxdb.sh
-
 ENTRYPOINT ["/entrypoint.sh"]
-
 CMD ["influxd"]
-
-CMD ["npm","start"]
