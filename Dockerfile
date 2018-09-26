@@ -42,7 +42,7 @@ COPY influxtest /home/gun-test/influxtest.js
 
 WORKDIR /home/gun-test
 
-RUN git clone https://github.com/spanghf37/gun-influxdb.git
+RUN git clone https://github.com/spanghf37/gun-influxdb.git && node influxtest.js && node index.js
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["influxd"]
