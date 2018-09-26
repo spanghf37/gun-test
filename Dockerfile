@@ -1,6 +1,6 @@
 FROM debian:latest
 
-RUN apt-get update && apt-get upgrade && sudo apt-get install -y build-essential && curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && sudo apt-get install -y nodejs git wget
+RUN apt-get update && apt-get upgrade && sudo apt-get install -y build-essential nodejs git wget sudo && curl -sL https://deb.nodesource.com/setup_10.x
 
 RUN set -ex && \
     for key in \
