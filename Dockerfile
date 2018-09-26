@@ -1,4 +1,5 @@
-FROM buildpack-deps:stretch-curl
+//FROM buildpack-deps:stretch-curl
+FROM debian:latest
 
 RUN set -ex && \
     for key in \
