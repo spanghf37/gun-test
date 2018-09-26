@@ -38,7 +38,7 @@ COPY init-influxdb.sh /init-influxdb.sh
 RUN mkdir /home/gun-test
 
 COPY index.js /home/gun-test/index.js
-COPY influxtest /home/gun-test/influxtest.js
+COPY influxtest.js /home/gun-test/influxtest.js
 
 WORKDIR /home/gun-test
 
