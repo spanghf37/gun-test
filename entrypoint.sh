@@ -10,5 +10,3 @@ if [ "$1" = 'influxd' ]; then
 fi
 
 exec "$@"
-
-node /home/gun-test/index.js
