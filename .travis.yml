@@ -5,9 +5,10 @@ language: bash
 script:
 # build image
 - docker build -t spanghf37/gun-test .
-# test image
-# - docker run spanghf37/knxd uname -a
 # push image
 - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
 - docker tag spanghf37/gun-test spanghf37/gun-test:amd64
 - docker push spanghf37/gun-test:amd64
+# use image
+- docker run --name gun-test spanghf37/gun-test:amd64
+- docker exec -it spanghf37/gun-test node -v
