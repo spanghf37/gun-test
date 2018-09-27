@@ -14,4 +14,4 @@ script:
 #- docker push spanghf37/gun-test:amd64
 # use image
 - sudo docker run -d --name gun-test spanghf37/gun-test:amd64
-- node -v
+- node influxtest.js
