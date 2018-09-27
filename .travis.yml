@@ -6,8 +6,7 @@ install:
 - npm install gun
 - npm install influx
 before_script:
-- sudo docker run -d --name gun-test spanghf37/gun-test:amd64
-- sudo docker exec -it gun-test influx -execute "CREATE DATABASE gun"
+- sudo docker run -d --name gun-test spanghf37/gun-test:amd64 && sudo docker exec -it gun-test influx -execute "CREATE DATABASE gun"
 script:
 # build image
 #- docker build -t spanghf37/gun-test .
