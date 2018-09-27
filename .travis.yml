@@ -11,4 +11,4 @@ script:
 - docker push spanghf37/gun-test:amd64
 # use image
 - sudo docker run -d --name gun-test spanghf37/gun-test:amd64
-- sudo docker exec -it spanghf37/gun-test:amd64 node -v
+- sudo docker exec -it gun-test node -v
