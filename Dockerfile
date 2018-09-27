@@ -1,6 +1,6 @@
 FROM debian:latest
 
-RUN apt-get update && apt-get upgrade && apt-get install -y build-essential git wget curl sudo && curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && apt-get -y install nodejs
+RUN apt-get update && apt-get upgrade && apt-get install -y build-essential git wget curl systemd sudo && curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && apt-get -y install nodejs
 
 RUN curl -sL https://repos.influxdata.com/influxdb.key | apt-key add - \
   source /etc/os-release \
@@ -29,4 +29,4 @@ WORKDIR /home/gun-test
 RUN npm install gun gun-flint influx && git clone https://github.com/spanghf37/gun-influxdb.git && ls
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["systemctl", "start", "influxdb"]
+CMD ["service", "influxdb", "start"]
