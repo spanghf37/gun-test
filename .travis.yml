@@ -2,13 +2,16 @@ sudo: required
 services:
 - docker
 language: node_js
+install:
+- npm install gun
+- npm install influx
 script:
 # build image
-- docker build -t spanghf37/gun-test .
+#- docker build -t spanghf37/gun-test .
 # push image
-- docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-- docker tag spanghf37/gun-test spanghf37/gun-test:amd64
-- docker push spanghf37/gun-test:amd64
+#- docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
+#- docker tag spanghf37/gun-test spanghf37/gun-test:amd64
+#- docker push spanghf37/gun-test:amd64
 # use image
 - sudo docker run -d --name gun-test spanghf37/gun-test:amd64
 - node -v
