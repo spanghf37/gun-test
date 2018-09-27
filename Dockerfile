@@ -2,29 +2,9 @@ FROM debian:latest
 
 RUN apt-get update && apt-get upgrade && apt-get install -y build-essential git wget curl sudo && curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && apt-get -y install nodejs
 
-RUN set -ex && \
-    for key in \
-        05CE15085FC09D18E99EFB22684A14CF2582E0C5 ; \
-    do \
-        gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" || \
-        gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
-        gpg --keyserver keyserver.pgp.com --recv-keys "$key" ; \
-    done
+RUN curl -sL https://repos.influxdata.com/influxdb.key | apt-key add - && source /etc/os-release && test $VERSION_ID = "7" && echo "deb https://repos.influxdata.com/debian wheezy stable" | tee /etc/apt/sources.list.d/influxdb.list && test $VERSION_ID = "8" && echo "deb https://repos.influxdata.com/debian jessie stable" | sudo tee /etc/apt/sources.list.d/influxdb.list && test $VERSION_ID = "9" && echo "deb https://repos.influxdata.com/debian stretch stable" | tee /etc/apt/sources.list.d/influxdb.list
 
-ENV INFLUXDB_VERSION 1.6.3
-RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" && \
-    case "${dpkgArch##*-}" in \
-      amd64) ARCH='amd64';; \
-      arm64) ARCH='arm64';; \
-      armhf) ARCH='armhf';; \
-      armel) ARCH='armel';; \
-      *)     echo "Unsupported architecture: ${dpkgArch}"; exit 1;; \
-    esac && \
-    wget --no-verbose https://dl.influxdata.com/influxdb/releases/influxdb_${INFLUXDB_VERSION}_${ARCH}.deb.asc && \
-    wget --no-verbose https://dl.influxdata.com/influxdb/releases/influxdb_${INFLUXDB_VERSION}_${ARCH}.deb && \
-    gpg --batch --verify influxdb_${INFLUXDB_VERSION}_${ARCH}.deb.asc influxdb_${INFLUXDB_VERSION}_${ARCH}.deb && \
-    dpkg -i influxdb_${INFLUXDB_VERSION}_${ARCH}.deb && \
-    rm -f influxdb_${INFLUXDB_VERSION}_${ARCH}.deb*
+RUN apt-get update && apt-get install influxdb
 
 COPY influxdb.conf /etc/influxdb/influxdb.conf
 
