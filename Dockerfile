@@ -42,9 +42,7 @@ COPY influxtest.js /home/gun-test/influxtest.js
 
 WORKDIR /home/gun-test
 
-CMD influxd
-
-RUN npm install gun gun-flint influx && git clone https://github.com/spanghf37/gun-influxdb.git && node influxtest.js && node index.js
+RUN npm install gun gun-flint influx && git clone https://github.com/spanghf37/gun-influxdb.git && ls
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["influxd"]
