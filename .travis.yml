@@ -15,7 +15,5 @@ script:
 #- docker tag spanghf37/gun-test spanghf37/gun-test:amd64
 #- docker push spanghf37/gun-test:amd64
 # use image
-#- sudo docker run -d --name gun-test spanghf37/gun-test:amd64
-- docker ps
-- influx -execute "CREATE DATABASE gun"
+- sudo docker exec -it gun-test influx -execute "CREATE DATABASE gun"
 - node influxtest.js
