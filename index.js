@@ -2,7 +2,7 @@ const Gun = require('gun');
 
 // Must be added after Gun but before instantiating Gun
 require('./gun-influxdb');
-require('./gun-mongo');
+// require('./gun-mongo');
 //require('gun/lib/time.js');
 
 // Instantiate Gun
