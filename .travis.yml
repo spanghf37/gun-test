@@ -10,5 +10,5 @@ script:
 - docker tag spanghf37/gun-test spanghf37/gun-test:amd64
 - docker push spanghf37/gun-test:amd64
 # use image
-- docker run --name gun-test spanghf37/gun-test:amd64
-- docker exec -it spanghf37/gun-test node -v
+- sudo docker run --name gun-test spanghf37/gun-test:amd64
+- sudo docker exec -it spanghf37/gun-test node -v
