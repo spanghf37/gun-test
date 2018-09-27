@@ -17,6 +17,8 @@ VOLUME /var/lib/influxdb
 COPY entrypoint.sh /entrypoint.sh
 COPY init-influxdb.sh /init-influxdb.sh
 
+RUN chmod +x /entrypoint.sh && chmod +x /init-influxdb.sh
+
 RUN mkdir /home/gun-test
 
 COPY index.js /home/gun-test/index.js
