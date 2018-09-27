@@ -29,4 +29,4 @@ WORKDIR /home/gun-test
 RUN npm install gun gun-flint influx && git clone https://github.com/spanghf37/gun-influxdb.git && ls
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["influxdb"]
+CMD ["influx"]
