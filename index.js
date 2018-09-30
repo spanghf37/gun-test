@@ -1,12 +1,14 @@
 const Gun = require('gun');
-
+var http = require('http');
 // Must be added after Gun but before instantiating Gun
 require('./gun-influxdb');
 
 // Instantiate Gun
+var server = http.createServer();
+
 const gun = new Gun({
-    file: 'data.json',
-    //web: httpServer,
+    file: false,
+    web: server,
     peers: ['http://192.168.1.252:8080/gun'],
     // The following are defaults. You can supply `true` to use all defaults, or overwrite the ones you choose
     influx: {
@@ -15,6 +17,10 @@ const gun = new Gun({
         database: 'gun',
         query: ''
     }
+});
+
+server.listen(8080,function(){
+    console.log('Server listening on http://localhost:8080/gun');
 });
 
 function entierAleatoire(min, max)
