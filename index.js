@@ -2,45 +2,35 @@ const Gun = require('gun');
 
 // Must be added after Gun but before instantiating Gun
 require('./gun-influxdb');
-// require('./gun-mongo');
-//require('gun/lib/time.js');
 
 // Instantiate Gun
 const gun = new Gun({
-    file: false,
+    file: true,
     //web: httpServer,
-
+    peers: ['192.168.1.252'],
     // The following are defaults. You can supply `true` to use all defaults, or overwrite the ones you choose
     influx: {
         host: 'localhost',
         port: '8086',
         database: 'gun',
-        //collection: 'gun-mongo',
         query: ''
     }
 });
 
-//var test = gun.get(Math.random().toString(36).replace('0.', '')).put({
-var test = gun.get('byr16sssszzzssss01vvddstt12').put({
-    tags: {gun_node_type: 'tags', unit: 'sna1', bigramme: 'AG',gun_main_key: 'byr16sssszzzssss01vvddstt12', timestamp: 1537902090013858742},
-    fields: {gun_node_type: 'fields', temperature: 81, huile: 20, gun_main_key: 'byr16sssszzzssss01vvddstt12', timestamp: 1537902090013858742},
-    timestamp: 1537902090013858742,
-    gun_node_type: 'main'
+function entierAleatoire(min, max)
+    {
+     return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+// Math.random().toString(36).replace('0.', '')
+    
+    let i;
+for (i =0; i < 1000; i++){
+    gun.get(Math.random().toString(36).replace('0.', '')).put({
+    tags: '', tags_unit: 'sna2', tags_bigramme: 'BN',
+    fields: '', fields_temperature: entierAleatoire(4000, 5000)/100, fields_huile: entierAleatoire(7000, 8000)/100,
+    timestamp: Date.now()*1000000-1000000000*i,
     //measurement: 'metrics'
 })
-    //tis: new Date()
-
-//console.log(test);
-// create amber
-//var compressor = gun.get('compresseur').get('timestamp').get(Date.now())
-//put({
-//  fields: {
-//      temperature_huile: 24.5,
-//      temperature_eau: 70.3
-//  },
-//  tags: {
-//      bigramme: 'AF',
-//      installation: 'comp_ba_12',
-//      platforme: 'ptf1'
-//  }
-//})
+}
+console.log("Ecriture OK");
