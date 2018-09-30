@@ -25,12 +25,12 @@ function entierAleatoire(min, max)
 // Math.random().toString(36).replace('0.', '')
     
 let i;
-for (i =0; i < 1000; i++){
-    gun.get(Math.random().toString(36).replace('0.', '')).put({
-    tags: '', tags_unit: 'sna2', tags_bigramme: 'BN',
-    fields: '', fields_temperature: entierAleatoire(4000, 5000)/100, fields_huile: entierAleatoire(7000, 8000)/100,
-    timestamp: Date.now()*1000000-1000000000*i,
+//for (i =0; i < 1000; i++){
+//    gun.get(Math.random().toString(36).replace('0.', '')).put({
+//    tags: '', tags_unit: 'sna2', tags_bigramme: 'BN',
+//    fields: '', fields_temperature: entierAleatoire(4000, 5000)/100, fields_huile: entierAleatoire(7000, 8000)/100,
+//    timestamp: Date.now()*1000000-1000000000*i,
     //measurement: 'metrics'
-})
-}
+//})
+//}
 console.log("Ecriture OK");
