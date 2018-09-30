@@ -19,8 +19,8 @@ const gun = new Gun({
     }
 });
 
-server.listen(8080,function(){
-    console.log('Server listening on http://localhost:8080/gun');
+server.listen(8880,function(){
+    console.log('Server listening on http://localhost:8880/gun');
 });
 
 function entierAleatoire(min, max)
