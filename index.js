@@ -19,7 +19,7 @@ const gun = new Gun({
     }
 });
 
-server.listen(8880,function(){
+server.listen(8888,function(){
     console.log('Server listening on http://localhost:8880/gun');
 });
 
