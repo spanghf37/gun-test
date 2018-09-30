@@ -7,7 +7,7 @@ require('./gun-influxdb');
 const gun = new Gun({
     file: 'data.json',
     //web: httpServer,
-    peers: ['192.168.1.252:8765'],
+    peers: ['192.168.1.252:8765/gun'],
     // The following are defaults. You can supply `true` to use all defaults, or overwrite the ones you choose
     influx: {
         host: 'localhost',
