@@ -5,7 +5,7 @@ require('./gun-influxdb');
 
 // Instantiate Gun
 const gun = new Gun({
-    file: false,
+    file: 'data.json',
     //web: httpServer,
     peers: ['192.168.1.252:8765'],
     // The following are defaults. You can supply `true` to use all defaults, or overwrite the ones you choose
